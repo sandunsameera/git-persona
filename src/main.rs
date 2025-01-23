@@ -19,6 +19,7 @@ fn cred_file_path() -> PathBuf {
 struct Credential {
     username: String,
     email: String,
+    ssh_key: Option<String>,
 }
 
 // Struct for CLI
@@ -36,6 +37,7 @@ enum Commands {
         name: String,
         username: String,
         email: String,
+        ssh_key: Option<String>,
     },
     List,
     Use {
@@ -62,11 +64,12 @@ fn save_credentials(credentials: &HashMap<String, Credential>) {
     fs::write(path, data).expect("Failed to save credentials");
 }
 
-fn add_credential(name: &str, username: &str, email: &str) {
+fn add_credential(name: &str, username: &str, email: &str, ssh_key: Option<&str>) {
     let mut credentials = load_credentials();
     credentials.insert(name.to_string(), Credential {
         username: username.to_string(),
         email: email.to_string(),
+        ssh_key: ssh_key.map(|key| key.to_string()),
     });
     save_credentials(&credentials);
     println!("Added credentials for {}", name);
@@ -75,7 +78,8 @@ fn add_credential(name: &str, username: &str, email: &str) {
 fn list_credentials() {
     let credentials = load_credentials();
     for (name, cred) in credentials {
-        println!("{}: {} <{}>", name, cred.username, cred.email);
+        let ssh_key_info = cred.ssh_key.as_deref().unwrap_or("None");
+        println!("{}: {} <{}>, SSH Key: {}", name, cred.username, cred.email, ssh_key_info);
     }
 }
 
@@ -90,6 +94,17 @@ fn use_credential(name: &str) {
             .args(&["config", "--global", "user.email", &cred.email])
             .output()
             .expect("Failed to set git email");
+
+        if let Some(ssh_key) = &cred.ssh_key {
+            let ssh_config = format!(
+                "Host *\n    IdentityFile {}\n",
+                ssh_key
+            );
+            let ssh_config_path = dirs::home_dir().unwrap().join(".ssh/config");
+            fs::write(&ssh_config_path, ssh_config).expect("Failed to write SSH config");
+            println!("Configured SSH key for {}", name);
+        }
+
         println!("Switched to credentials for {}", name);
     } else {
         println!("No credentials found for {}", name);
@@ -110,10 +125,11 @@ fn main() {
     let cli = Cli::parse();
 
     match cli.command {
-        Commands::Add { name, username, email } => add_credential(&name, &username, &email),
+        Commands::Add { name, username, email, ssh_key } => add_credential(&name, &username, &email, ssh_key.as_deref()),
         Commands::List => list_credentials(),
         Commands::Use { name } => use_credential(&name),
         Commands::Remove { name } => remove_credential(&name),
     }
 }
+
 

@@ -22,7 +22,7 @@ git-persona is a CLI tool for managing multiple Git profiles and credentials. It
 ### Build from Source
 
 1. Clone the repository:
-   ```bash
+   ```bash  
    git clone https://github.com/your-repo/git-persona.git
    cd git-persona
    ```
