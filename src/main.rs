@@ -5,7 +5,6 @@ use std::fs;
 use std::path::PathBuf;
 use std::process::Command;
 
-// Path to store credentials securely
 fn cred_file_path() -> PathBuf {
     let dir = dirs::config_dir().unwrap().join("git-persona");
     if !dir.exists() {
@@ -14,7 +13,6 @@ fn cred_file_path() -> PathBuf {
     dir.join("credentials.json")
 }
 
-// Struct for credentials
 #[derive(Serialize, Deserialize)]
 struct Credential {
     username: String,
@@ -22,7 +20,6 @@ struct Credential {
     ssh_key: Option<String>,
 }
 
-// Struct for CLI
 #[derive(Parser)]
 #[command(name = "git-persona")]
 #[command(about = "A CLI tool for managing Git credentials", long_about = None)]

@@ -47,11 +47,11 @@ git-persona is a CLI tool for managing multiple Git profiles and credentials. It
 
 To add a new Git profile:
 ```bash
-git-persona add --name <profile_name> --username <username> --email <email>
+git-persona add<profile_name> <username> <email> <path-to-ssh-file>
 ```
 Example:
 ```bash
-git-persona add --name work --username "WorkUser" --email "work@example.com"
+git-persona add  work "WorkUser" "work@example.com" "~/.ssh/id_rsa_work"
 ```
 
 ### List Profiles
@@ -121,10 +121,10 @@ Contributions are welcome! To contribute:
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the The Unlicense. See the [LICENSE](LICENSE) file for details.
 
 ---
 
 ## Support
 
-If you encounter any issues or have questions, please open an issue on [GitHub](https://github.com/your-repo/git-persona/issues).
+If you encounter any issues or have questions, please open an issue on [GitHub](https://github.com/sandunsameera/git-persona/issues).
