@@ -1,2 +1,2 @@
 cargo build --release
-sudo cp target/release/git-persona /usr/local/bin/git-persona
+sudo cp target/release/gitty /usr/local/bin/gitty

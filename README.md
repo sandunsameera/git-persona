@@ -1,6 +1,6 @@
-# git-persona
+# gitty
 
-git-persona is a CLI tool for managing multiple Git profiles and credentials. It simplifies switching between different identities (e.g., work, personal) for Git repositories. With git-persona, you can easily add, remove, and use profiles without manually editing your `.gitconfig` file.
+gitty is a CLI tool for managing multiple Git profiles and credentials. It simplifies switching between different identities (e.g., work, personal) for Git repositories. With gitty, you can easily add, remove, and use profiles without manually editing your `.gitconfig` file.
 
 ---
 
@@ -23,8 +23,8 @@ git-persona is a CLI tool for managing multiple Git profiles and credentials. It
 
 1. Clone the repository:
    ```bash  
-   git clone https://github.com/your-repo/git-persona.git
-   cd git-persona
+   git clone https://github.com/your-repo/gitty.git
+   cd gitty
    ```
 2. Build the project:
    ```bash
@@ -32,11 +32,11 @@ git-persona is a CLI tool for managing multiple Git profiles and credentials. It
    ```
 3. Install the binary:
    ```bash
-   cp target/release/git-persona /usr/local/bin/git-persona
+   cp target/release/gitty /usr/local/bin/gitty
    ```
 4. Verify the installation:
    ```bash
-   git-persona --help
+   gitty --help
    ```
 
 ---
@@ -47,53 +47,53 @@ git-persona is a CLI tool for managing multiple Git profiles and credentials. It
 
 To add a new Git profile:
 ```bash
-git-persona add<profile_name> <username> <email> <path-to-ssh-file>
+gitty add<profile_name> <username> <email> <path-to-ssh-file>
 ```
 Example:
 ```bash
-git-persona add  work "WorkUser" "work@example.com" "~/.ssh/id_rsa_work"
+gitty add  work "WorkUser" "work@example.com" "~/.ssh/id_rsa_work"
 ```
 
 ### List Profiles
 
 To list all saved profiles:
 ```bash
-git-persona list
+gitty list
 ```
 
 ### Use a Profile
 
 To switch to a saved profile globally:
 ```bash
-git-persona use --name <profile_name>
+gitty use --name <profile_name>
 ```
 Example:
 ```bash
-git-persona use --name work
+gitty use --name work
 ```
 
 ### Remove a Profile
 
 To delete a saved profile:
 ```bash
-git-persona remove --name <profile_name>
+gitty remove --name <profile_name>
 ```
 Example:
 ```bash
-git-persona remove --name work
+gitty remove --name work
 ```
 
 ---
 
 ## How It Works
 
-git-persona stores your profiles in a secure configuration file located in your system's configuration directory (e.g., `~/.config/git-persona/credentials.json`).
+gitty stores your profiles in a secure configuration file located in your system's configuration directory (e.g., `~/.config/gitty/credentials.json`).
 
-When you use a profile, git-persona updates your global Git configuration using:
+When you use a profile, gitty updates your global Git configuration using:
 - `git config --global user.name`
 - `git config --global user.email`
 
-For more advanced setups, you can use git-persona to manage repository-specific credentials by navigating to the repository and running:
+For more advanced setups, you can use gitty to manage repository-specific credentials by navigating to the repository and running:
 ```bash
 git config user.name <username>
 git config user.email <email>
@@ -127,4 +127,4 @@ This project is licensed under the The Unlicense. See the [LICENSE](LICENSE) fil
 
 ## Support
 
-If you encounter any issues or have questions, please open an issue on [GitHub](https://github.com/sandunsameera/git-persona/issues).
+If you encounter any issues or have questions, please open an issue on [GitHub](https://github.com/sandunsameera/gitty/issues).

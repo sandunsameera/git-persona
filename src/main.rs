@@ -6,7 +6,7 @@ use std::path::PathBuf;
 use std::process::Command;
 
 fn cred_file_path() -> PathBuf {
-    let dir = dirs::config_dir().unwrap().join("git-persona");
+    let dir = dirs::config_dir().unwrap().join("gitty");
     if !dir.exists() {
         fs::create_dir_all(&dir).expect("Failed to create config directory");
     }
@@ -21,7 +21,7 @@ struct Credential {
 }
 
 #[derive(Parser)]
-#[command(name = "git-persona")]
+#[command(name = "gitty")]
 #[command(about = "A CLI tool for managing Git credentials", long_about = None)]
 struct Cli {
     #[command(subcommand)]

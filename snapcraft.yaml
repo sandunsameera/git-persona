@@ -1,0 +1,16 @@
+name: gitty
+version: '0.1.0'  # Match your Cargo.toml version
+summary: Manage multiple Git profiles and credentials
+description: gitty is a CLI tool for managing multiple Git profiles and credentials. It simplifies switching between different identities (e.g., work, personal) for Git repositories. With gitty, you can easily add, remove, and use profiles without manually editing your .gitconfig file.
+base: core22
+grade: stable
+confinement: strict
+
+parts:
+  gitty:
+    plugin: rust
+    source: .
+
+apps:
+  gitty:
+    command: gitty
